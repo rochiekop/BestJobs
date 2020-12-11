@@ -8,12 +8,11 @@
 
 import React from 'react';
 import {View, Text} from 'react-native';
-import LoginPage from './component/LoginPage';
+import StackNavigator from './router/StackNavigator';
+
 const App = () => {
   return (
-    <View>
-      <LoginPage />
-    </View>
+    <StackNavigator/>
   );
 };
 export default App;
