@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "904702247586",
+    "firebase_url": "https://best-job-test-default-rtdb.firebaseio.com",
+    "project_id": "best-job-test",
+    "storage_bucket": "best-job-test.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:904702247586:android:e2c8d14f417d934b238dfb",
+        "android_client_info": {
+          "package_name": "com.bestjobs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "904702247586-rnkij71f51upfc9952rmb5p3gtm8unfa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwMCVchjDrsiES_hXr8ELsFZUP40z0Y8E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "904702247586-rnkij71f51upfc9952rmb5p3gtm8unfa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

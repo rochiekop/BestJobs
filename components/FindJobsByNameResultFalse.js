@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Dimensions, Text, View, StyleSheet , Image} from 'react-native';
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
-
+import Icon from 'react-native-vector-icons/Ionicons';
+import IconFA from 'react-native-vector-icons/FontAwesome';
 
 
 const window = Dimensions.get("window");
@@ -20,9 +21,7 @@ function FindJobsByNameResultFalse({navigation,route}) {
             }}>
                 <Text style={styles.textTitleHeader}>Penasaran apa saja yang  </Text>
                 <Text style={styles.textTitleHeader}>Dibutuhkan untuk  <Text style={{color:'#FFC93C'}}>Pekerjaan</Text> Ini ?</Text>
-                <Text style={{
-                    fontSize:12
-                }}>Tapi Sebelumnya, Isi dulu Data Berikut</Text>
+                
             </View>
 
             <View style={styles.containerContent}>
@@ -36,11 +35,36 @@ function FindJobsByNameResultFalse({navigation,route}) {
                 
             <TouchableOpacity style={[styles.touchButton,{marginTop:'10%'}]}
                onPress={()=>{
-                navigation.replace('FindJobsByName');
+                navigation.pop();
                }}
                 >
                     <Text style={styles.textButton}>Kembali</Text>
                 </TouchableOpacity>    
+            </View>
+            <View style={[styles.btnNavigation,{
+                marginTop:'8%'
+            }]}>
+                <View style={styles.iconNavPosition}>
+                <TouchableOpacity 
+                onPress={()=>{
+                    navigation.navigate('Home', { screen: 'Home' });
+                }}
+                >
+                <Icon name="home-outline" color={'rgba(0,0,0,0.5)'} size={25} />
+                </TouchableOpacity>
+                </View>
+                <View style={styles.iconNavPosition}>
+                <Icon name="briefcase" color={'black'} size={25} />
+                </View>
+                <View style={styles.iconNavPosition}>
+                <TouchableOpacity 
+                onPress={()=>{
+                    navigation.navigate('Home', { screen: 'Profile' });
+                }}
+                >
+                <IconFA name="user-o" color={'rgba(0,0,0,0.5)'} size={25} />
+                </TouchableOpacity>
+                </View>
             </View>
         </View>
     );
@@ -53,17 +77,17 @@ const styles = StyleSheet.create({
         backgroundColor:'#F5F5F5'
     },
     textTitleHeader:{
-        fontSize:18,
+        fontSize:19,
         color:'black',
         fontFamily:'Roboto',
         fontWeight:"bold",
     },
     containerContent:{
-        marginTop:'10%',
+        marginTop:'5%',
         backgroundColor:'white',
         elevation:10,
         width:(window.width * 0.9),
-        height: (window.height * 0.65),
+        height:'63%',
         borderRadius:20,
         alignItems:"center"
     },
@@ -84,6 +108,20 @@ const styles = StyleSheet.create({
     textButton:{
         fontSize:14,
         fontWeight: 'bold', 
-    }
+    },    
+    btnNavigation: {
+        height: 49,
+        backgroundColor: '#FDFDFD',
+        flexDirection: 'row',
+      },
+      iconBtnNavigation: {
+        width: 27,
+        height: 26,
+      },
+      iconNavPosition: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
 })
 export default FindJobsByNameResultFalse;

@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {StyleSheet, Text, View, Image} from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import auth from '@react-native-firebase/auth'
 
-const JobOption = () => {
+const JobOption = ({navigation}) => {
+  const [user, setUser] = useState(auth().currentUser);
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -14,14 +17,18 @@ const JobOption = () => {
               />
             </View>
             <View style={styles.desc}>
-              <Text style={styles.name}>Jhon Doe</Text>
-              <Text style={styles.age}>25 Tahun</Text>
+              <Text style={styles.name}>{user.displayName}</Text>
+              <Text style={styles.age}>{user.email}</Text>
             </View>
           </View>
         </View>
       </View>
       <View style={styles.main}>
-        <View style={styles.jobWrap}>
+        <TouchableOpacity style={styles.jobWrap}
+        onPress={()=>{
+          navigation.navigate('JobsBySkill',{screen:'FindJobsBySkill'})
+        }}
+        >
           <Image
             source={require('../assets/icon/science.png')}
             style={styles.jobIcon}
@@ -30,8 +37,12 @@ const JobOption = () => {
             <Text style={styles.jobName}>Cari Pekerjaan Sesuai</Text>
             <Text style={styles.jobName}>Skill dan Minat</Text>
           </View>
-        </View>
-        <View style={styles.jobWrap}>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.jobWrap}
+        onPress={()=>{
+          navigation.navigate('JobsByName',{screen:'FindJobsByName'})
+        }}
+        >
           <View style={styles.jobDesc}>
             <Text style={styles.jobNameLeft}>Cari Tahu Tentang</Text>
             <Text style={styles.jobNameLeft}>Pekerjaan</Text>
@@ -40,28 +51,9 @@ const JobOption = () => {
             source={require('../assets/icon/science.png')}
             style={styles.jobIconRight}
           />
-        </View>
+        </TouchableOpacity>
       </View>
-      <View style={styles.btnNavigation}>
-        <View style={styles.iconNavPosition}>
-          <Image
-            source={require('../assets/icon/home.png')}
-            style={styles.iconBtnNavigation}
-          />
-        </View>
-        <View style={styles.iconNavPosition}>
-          <Image
-            source={require('../assets/icon/suitcase.png')}
-            style={styles.iconBtnNavigation}
-          />
-        </View>
-        <View style={styles.iconNavPosition}>
-          <Image
-            source={require('../assets/icon/user.png')}
-            style={styles.iconBtnNavigation}
-          />
-        </View>
-      </View>
+
     </View>
   );
 };

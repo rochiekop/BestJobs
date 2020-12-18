@@ -6,25 +6,15 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import IconFA from 'react-native-vector-icons/FontAwesome';
 import {BlurView} from '@react-native-community/blur';
 import database from '@react-native-firebase/database';
-import { useEffect } from 'react';
 
-const referenceJobs = database().ref('job');
 const window = Dimensions.get("window");
 const screen = Dimensions.get("screen");
 function FindJobsByName({navigation}) {
-    const [searchJob, setSearchJob] = useState('');
+
     const [modalVisible, setModalVisible] = useState(false);
     const [showBlur, setShowBlur] = useState(false);
-    const [jobsKey, setJobsKey] = useState([]);
-    async function getJobs(search){
-      await referenceJobs.orderByChild('nama').equalTo(search).once('value')
-      .then(snapshot => {
-        let data = snapshot.val();
-        let jobItem = {...data};
-        setJobsKey(Object.keys(jobItem));
-        console.log(jobsKey.length);
-      });
-    }
+
+
     return (
         <View style={styles.container}>
  
@@ -57,67 +47,7 @@ function FindJobsByName({navigation}) {
                 <TouchableOpacity
                 style={styles.btnMasuk}
                 onPress={()=>{
-                // let jobs=['android developer','data scientist','back-end developer','front-end developer','product designer'];
-                if(searchJob == 'Android Developer'){
-                  setModalVisible(false);
-                    setShowBlur(false);
-                    navigation.navigate('JobsByName', {
-                      screen: 'FindJobsByNameResultTrue',
-                      params:{
-                        nama_job: searchJob
-                      }
-                    })
-                  
-                }else if(searchJob == 'Front-end Developer'){
-                    setModalVisible(false);
-                    setShowBlur(false);
-                    navigation.navigate('JobsByName', {
-                      screen: 'FindJobsByNameResultTrue',
-                      params:{
-                        nama_job: searchJob
-                      }
-                    })
-                }else if(searchJob == 'Back-end Developer'){
-                  setModalVisible(false);
-                    setShowBlur(false);
-                    navigation.navigate('JobsByName', {
-                      screen: 'FindJobsByNameResultTrue',
-                      params:{
-                        nama_job: searchJob
-                      }
-                    })
-                }else if(searchJob == 'Data Scientist'){
-                  setModalVisible(false);
-                  setShowBlur(false);
-                  navigation.navigate('JobsByName', {
-                    screen: 'FindJobsByNameResultTrue',
-                    params:{
-                      nama_job: searchJob
-                    }
-                  })
-                }else if(searchJob == 'Product Designer'){
-                  setModalVisible(false);
-                    setShowBlur(false);
-                    navigation.navigate('JobsByName', {
-                      screen: 'FindJobsByNameResultTrue',
-                      params:{
-                        nama_job: searchJob
-                      }
-                    })
-                }else{
-                    setModalVisible(false);
-                    setShowBlur(false);
-                    navigation.navigate('JobsByName', {screen: 'FindJobsByNameResultFalse'})
-                }
-                  // if(searchJob == 'Android Developer'){
-                  //   setModalVisible(false);
-                  //   setShowBlur(false);
-                  //   navigation.navigate('JobsByName', {screen: 'FindJobsByNameResultTrue'})
-                  // }else{
-                  //   setModalVisible(false);
-                  //   setShowBlur(false);
-                  //   navigation.navigate('JobsByName', {screen: 'FindJobsByNameResultFalse'})
-                  // }
+               
                 }}
                 >
                   <Text style={{fontWeight: 'bold'}}>Sudah</Text>
@@ -157,6 +87,7 @@ function FindJobsByName({navigation}) {
                         placeholderTextColor="#676767"
                         onChangeText={text => setSearchJob(text)}
                     />
+
                 
                 <TouchableOpacity style={[styles.touchButton,{marginTop:'10%'}]}
                onPress={()=> {

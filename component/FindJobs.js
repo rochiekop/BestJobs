@@ -6,9 +6,22 @@ import {
   Image,
   TextInput,
   ScrollView,
+  Modal,
+  Alert,
 } from 'react-native';
 
-const FindJobs = () => {
+import Icon from 'react-native-vector-icons/Ionicons';
+import IconFA from 'react-native-vector-icons/FontAwesome';
+import { TouchableHighlight } from 'react-native-gesture-handler';
+import { TouchableOpacity } from 'react-native';
+import { useState } from 'react';
+import {BlurView} from '@react-native-community/blur';
+
+const FindJobs = ({navigation}) => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [skills1, setSkills1] = useState('');
+  const [skills2, setSkills2] = useState('');
+  const [showBlur, setShowBlur] = useState(false);
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -23,8 +36,122 @@ const FindJobs = () => {
           </Text>
         </View>
       </View>
-      <View style={styles.main}>
+      <View style={[styles.main]}
+      >
+        
         <View style={styles.content}>
+            <Modal
+            animationType="fade"
+            transparent={true}
+            visible={modalVisible}
+            onRequestClose={() => {
+              setModalVisible(false);
+            }}
+          >
+            <View style={{
+              flex:1,
+              justifyContent: "center",
+              alignItems: "center",
+            }}>
+              <View style={{
+                width:'90%',
+                height:'50%',
+                justifyContent: "center",
+                alignItems: "center",
+                backgroundColor: "rgba(255,255,255,0.1)",
+                
+               
+              }}>
+                <Text style={{fontSize: 16, fontWeight: 'bold'}}
+                >Apakah Kamu Sudah Yakin ?</Text>
+                <Text style={{fontSize: 16, fontWeight: 'bold'}}
+                >Dengan apa yang kamu isi</Text>
+                <TouchableOpacity
+                style={styles.btnMasuk}
+                onPress={()=>{
+                  let skill1 = skills1.toLowerCase();
+                  let skill2 = skills2.toLowerCase();
+                  if(skill1 == 'java' && skill2 == 'sql' || skill1=='sql' && skill2=='java'){
+                    //android developer
+                    setModalVisible(false);
+                    setShowBlur(false);
+                    navigation.navigate('JobsByName', {
+                      screen: 'FindJobsByNameResultTrue',
+                      params:{
+                        nama_job: 'Android Developer'
+                      }
+                    });
+                  }else if(skill1 == 'nodejs' && skill2 == 'mongodb' || skill1=='mongodb' && skill2=='nodejs'){
+                    //backend developer
+                    setModalVisible(false);
+                    setShowBlur(false);
+                    navigation.navigate('JobsByName', {
+                      screen: 'FindJobsByNameResultTrue',
+                      params:{
+                        nama_job: 'Back-end Developer'
+                      }
+                    });
+                  }else if(skill1 == 'css' && skill2 == 'css framework' || skill1=='css framework' && skill2=='html'){
+                    //frontend developer
+                    setModalVisible(false);
+                    setShowBlur(false);
+                    navigation.navigate('JobsByName', {
+                      screen: 'FindJobsByNameResultTrue',
+                      params:{
+                        nama_job: 'Front-end Developer'
+                      }
+                    });
+                  }else if(skill1 == 'python' && skill2 == 'sql' || skill1=='sql' && skill2=='python'){
+                    //data scientist
+                    setModalVisible(false);
+                    setShowBlur(false);
+                    navigation.navigate('JobsByName', {
+                      screen: 'FindJobsByNameResultTrue',
+                      params:{
+                        nama_job: 'Data Scientist'
+                      }
+                    });
+                  }else if(skill1 == 'ui design' && skill2 == 'ux research' || skill1=='ux research' && skill2=='ui design'){
+                    //product designer
+                    setModalVisible(false);
+                    setShowBlur(false);
+                    navigation.navigate('JobsByName', {
+                      screen: 'FindJobsByNameResultTrue',
+                      params:{
+                        nama_job: 'Product Designer'
+                      }
+                    });
+                  }else{
+                    setModalVisible(false);
+                    setShowBlur(false);
+                    navigation.navigate('JobsBySkill', {screen: 'FindJobsBySkillsResultFalse'})
+                  }
+                
+                  // if(skills == 'Java'){
+                  //   setModalVisible(false);
+                  //   setShowBlur(false);
+                  //   navigation.navigate( 'JobsBySkill', {screen:'FindJobsBySkillsResultTrue'});
+                  // }else{
+                  //   setModalVisible(false);
+                  //   setShowBlur(false);
+                  //   navigation.navigate('JobsBySkill', {screen: 'FindJobsBySkillsResultFalse'})
+                  // }
+                }}
+                >
+                  <Text style={{fontWeight: 'bold'}}>Sudah</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                style={styles.btnCancel}
+                onPress={()=>{
+                  setModalVisible(false)
+                  setShowBlur(false);
+                }}
+                >
+                  <Text style={{fontWeight: 'bold'}}>Belum</Text>
+                </TouchableOpacity>
+              </View>
+        </View>
+          </Modal>
           <ScrollView>
             <Text
               style={{
@@ -43,39 +170,68 @@ const FindJobs = () => {
               <TextInput
                 placeholder="Skills yang dikuasai"
                 style={styles.input}
+                onChangeText={text => setSkills1(text)}
               />
               <TextInput
                 placeholder="Skills yang dikuasai"
                 style={styles.input}
+                onChangeText={text => setSkills2(text)}
               />
               <TextInput placeholder="Bakat" style={styles.input} />
             </View>
             <View style={styles.btnWrap}>
-              <View style={styles.btnMasuk}>
+              <TouchableOpacity style={styles.btnMasuk}
+              onPress={() => {
+                setModalVisible(true);
+                setShowBlur(true);
+              }}
+              >
                 <Text style={{fontWeight: 'bold'}}>Cari</Text>
-              </View>
+              </TouchableOpacity>
             </View>
           </ScrollView>
+          {showBlur ? (
+            <BlurView
+            style={{
+              position: "absolute",
+              top: -10,
+              left: -10,
+              bottom: 0,
+              right: -10,
+            }}
+            
+            blurType="light"
+            blurAmount={1} //max 25
+            blurRadius={5} //seberapa blur
+            downsampleFactor={25}
+            />
+          ) : (
+            null
+          )}
         </View>
       </View>
       <View style={styles.btnNavigation}>
         <View style={styles.iconNavPosition}>
-          <Image
-            source={require('../assets/icon/home.png')}
-            style={styles.iconBtnNavigation}
-          />
+        <TouchableOpacity 
+          onPress={()=>{
+            navigation.navigate('Home', { screen: 'Home' });
+          }}
+          >
+        <Icon name="home-outline" color={'rgba(0,0,0,0.5)'} size={25} />
+        </TouchableOpacity>
         </View>
         <View style={styles.iconNavPosition}>
-          <Image
-            source={require('../assets/icon/suitcase.png')}
-            style={styles.iconBtnNavigation}
-          />
+          <Icon name="briefcase" color={'black'} size={25} />
         </View>
         <View style={styles.iconNavPosition}>
-          <Image
-            source={require('../assets/icon/user.png')}
-            style={styles.iconBtnNavigation}
-          />
+        <TouchableOpacity 
+          onPress={()=>{
+            navigation.navigate('Home', { screen: 'Profile' });
+          }}
+          >
+
+          <IconFA name="user-o" color={'rgba(0,0,0,0.5)'} size={25} />
+          </TouchableOpacity>
         </View>
       </View>
     </View>
@@ -114,7 +270,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   btnNavigation: {
-    height: 50,
+    height: 49,
     backgroundColor: '#FDFDFD',
     flexDirection: 'row',
   },
@@ -165,6 +321,23 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#FFC93C',
+    height: 35,
+    width: 100,
+    borderRadius: 15,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  btnCancel: {
+    marginBottom: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#FF3F3F',
     height: 35,
     width: 100,
     borderRadius: 15,

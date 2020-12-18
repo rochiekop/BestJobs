@@ -1,14 +1,80 @@
 import React from 'react';
-import {StyleSheet, Text, TextInput, View} from 'react-native';
+import {StyleSheet, Text, TextInput, View, TouchableOpacity, Modal, ActivityIndicator} from 'react-native';
+import auth from '@react-native-firebase/auth';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import {BlurView} from '@react-native-community/blur';
+import { useNavigation } from '@react-navigation/native';
 
-const LoginPage = () => {
+
+const LoginPage = ({navigation}) => {
+
+  const [modalVisible, setModalVisible] = useState(false);
+  const [showBlur, setShowBlur] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+  const [messageError, setMessageError] = useState('');
+  const [errorCode, setErrorCode]= useState('');
+  
+  async function doLogin() {
+    await auth()
+    .signInWithEmailAndPassword(email,password)
+    .then(() => {
+      console.log('success login'); 
+    }).then(()=>{
+      navigation.replace('Home');
+    })
+    .catch((error) => {
+      setIsError(true);
+      setMessageError(error.message);
+      setErrorCode(error.code);
+      setModalVisible(false);
+      setShowBlur(false);
+      console.log(error);
+    })
+
+  }
   return (
     <View>
+      <Modal
+            animationType="fade"
+            transparent={true}
+            visible={modalVisible}
+          >
+            <View style={{
+              flex:1,
+              justifyContent: "center",
+              alignItems: "center",
+            }}>
+              <View style={{
+                width:'90%',
+                height:'50%',
+                justifyContent: "center",
+                alignItems: "center",
+                backgroundColor: "rgba(255,255,255,0.1)",
+                
+               
+              }}>
+                <Text style={{fontSize: 16, fontWeight: 'bold'}}
+                onPress={()=>{
+
+                }}
+                >Sedang Memproses...</Text>
+                <ActivityIndicator size={50} color="#FFC93C"
+                style={{marginTop:'10%'}}
+                />
+                
+              </View>
+        </View>
+          </Modal>
       <View style={styles.roundsUp}>
         <Text />
       </View>
       <View style={styles.wrapText}>
-        <Text style={styles.titleBest}>Best</Text>
+        <Text style={styles.titleBest}
+        >Best</Text>
         <Text style={styles.titleJobs}>Jobs</Text>
         <View style={styles.wrapDesc}>
           <Text style={styles.desc}>
@@ -17,24 +83,61 @@ const LoginPage = () => {
             mu disini !
           </Text>
         </View>
+        
       </View>
       <View style={styles.inputWrap}>
-        <TextInput placeholder="Email" style={styles.input} />
-        <TextInput placeholder="Password" style={styles.input} />
+      {isError ? (<Text  style={{color:'red', textAlign:'center', marginBottom:10}}>{messageError.split(']')[1]}</Text>) : null } 
+        <TextInput placeholder="Email" style={styles.input} 
+        onChangeText={(text) => setEmail(text) }
+        />
+        <TextInput placeholder="Password" style={styles.input} 
+        secureTextEntry={true}
+        onChangeText={(text) => setPassword(text) }
+        />
       </View>
       <View style={styles.btnWrap}>
-        <View style={styles.btnMasuk}>
+      <TouchableOpacity style={styles.btnMasuk}
+        onPress={()=> {
+          setModalVisible(true);
+          setShowBlur(true);
+          doLogin();
+          
+        }}
+        >
           <Text style={{fontWeight: 'bold'}}>Masuk</Text>
-        </View>
+        </TouchableOpacity>
         <Text style={styles.regis}>
           Belum Punya akun ? silakan{' '}
-          <Text style={styles.descColorYellow}>Daftar</Text> disini !
+          <Text style={styles.descColorYellow}
+          onPress={()=>navigation.navigate('RegisterPage')}
+          >Daftar</Text> disini !
         </Text>
       </View>
+      
       <View style={styles.roundsDown}>
         <Text />
       </View>
+      {showBlur ? (
+            <BlurView
+            style={{
+              position: "absolute",
+              top: -10,
+              left: -10,
+              bottom: 0,
+              right: -10,
+            }}
+            
+            blurType="light"
+            blurAmount={1} //max 25
+            blurRadius={5} //seberapa blur
+            downsampleFactor={25}
+            />
+          ) : (
+            null
+          )}
+     
     </View>
+    
   );
 };
 
@@ -58,7 +161,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.3,
     shadowRadius: 4.65,
-    elevation: 8,
+    elevation: 1,
   },
   wrapText: {
     alignItems: 'center',
@@ -116,7 +219,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    elevation: 5,
+   
   },
   btnWrap: {
     alignItems: 'center',

@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {StyleSheet, Text, View, Image, ScrollView} from 'react-native';
-
-const Profile = () => {
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import auth from '@react-native-firebase/auth';
+const Profile = ({navigation}) => {
+  const [user, setUser] = useState(auth().currentUser);
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -12,8 +14,8 @@ const Profile = () => {
               style={styles.imgProfile}
             />
           </View>
-          <Text style={styles.name}>Jhon Doe</Text>
-          <Text style={styles.age}>25 Tahun</Text>
+          <Text style={styles.name}>{user != null ? user.displayName : ''}</Text>
+          <Text style={styles.age}>{user.email}</Text>
         </View>
       </View>
       <View style={styles.main}>
@@ -49,7 +51,16 @@ const Profile = () => {
             </Text>
           </View>
         </View>
-        <View style={styles.menuProfile}>
+        <TouchableOpacity style={styles.menuProfile}
+        onPress={()=>{
+          auth()
+          .signOut()
+          .then(() => {
+            console.log('User signed out!')
+            navigation.replace('Auth', {screen : 'LoginPage'});
+          });
+        }}
+        >
           <View
             style={{
               alignItems: 'center',
@@ -64,27 +75,7 @@ const Profile = () => {
               Logout
             </Text>
           </View>
-        </View>
-      </View>
-      <View style={styles.btnNavigation}>
-        <View style={styles.iconNavPosition}>
-          <Image
-            source={require('../assets/icon/home.png')}
-            style={styles.iconBtnNavigation}
-          />
-        </View>
-        <View style={styles.iconNavPosition}>
-          <Image
-            source={require('../assets/icon/suitcase.png')}
-            style={styles.iconBtnNavigation}
-          />
-        </View>
-        <View style={styles.iconNavPosition}>
-          <Image
-            source={require('../assets/icon/user.png')}
-            style={styles.iconBtnNavigation}
-          />
-        </View>
+        </TouchableOpacity>
       </View>
     </View>
   );
