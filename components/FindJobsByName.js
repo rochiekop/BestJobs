@@ -95,13 +95,13 @@ function FindJobsByName({navigation}) {
                       nama_job: searchJob
                     }
                   })
-                }else if(searchJob == 'Product Designer'){
+                }else if(searchJob == 'Fullstack Developer'){
                   setModalVisible(false);
                     setShowBlur(false);
                     navigation.navigate('JobsByName', {
                       screen: 'FindJobsByNameResultTrue',
                       params:{
-                        nama_job: searchJob
+                        nama_job: 'FullStack Developer'
                       }
                     })
                 }else{
@@ -109,15 +109,7 @@ function FindJobsByName({navigation}) {
                     setShowBlur(false);
                     navigation.navigate('JobsByName', {screen: 'FindJobsByNameResultFalse'})
                 }
-                  // if(searchJob == 'Android Developer'){
-                  //   setModalVisible(false);
-                  //   setShowBlur(false);
-                  //   navigation.navigate('JobsByName', {screen: 'FindJobsByNameResultTrue'})
-                  // }else{
-                  //   setModalVisible(false);
-                  //   setShowBlur(false);
-                  //   navigation.navigate('JobsByName', {screen: 'FindJobsByNameResultFalse'})
-                  // }
+
                 }}
                 >
                   <Text style={{fontWeight: 'bold'}}>Sudah</Text>

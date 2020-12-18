@@ -70,7 +70,7 @@ const Home = ({navigation}) => {
                     <Image source={jobIcon} style={styles.jobIcon} />
                     <View style={styles.jobDesc}>
                       <Text style={styles.jobName}>{jobs[key].nama}</Text>
-                      <Text style={styles.jobSalary}>Gaji rata-rata : $ {jobs[key].gaji}</Text>
+                      <Text style={styles.jobSalary}>{jobs[key].gaji}</Text>
                     </View>
                 </TouchableOpacity>
                 ))

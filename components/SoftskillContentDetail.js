@@ -127,7 +127,10 @@ function SoftskillContentDetail({navigation,route}) {
                         <TouchableOpacity>
                             <Text style={{
                                 fontSize:20, fontWeight:"bold", color:'black', marginRight:'5%'
-                                }}>{(softskillsKey[index]).charAt(0).toUpperCase() + (softskillsKey[index]).slice(1)}</Text>
+                                }}>{
+                                    (softskillsKey[index].includes('_')) ? ((softskillsKey[index].replace('_',' ')).charAt(0).toUpperCase() +(softskillsKey[index].replace('_',' ').slice(1))) : 
+                                ((softskillsKey[index]).charAt(0).toUpperCase() + (softskillsKey[index]).slice(1))
+                                }</Text>
                             </TouchableOpacity>
                                 
                     </View>
@@ -220,7 +223,10 @@ function SoftskillContentDetail({navigation,route}) {
                             <TouchableOpacity>
                                 <Text style={{
                                     fontSize:20, fontWeight:"bold", color:'black', marginRight:'5%'
-                                    }}>{(softskillsKey[index]).charAt(0).toUpperCase() + (softskillsKey[index]).slice(1)}</Text>
+                                    }}>{
+                                        (softskillsKey[index].includes('_')) ? ((softskillsKey[index].replace('_',' ')).charAt(0).toUpperCase() +(softskillsKey[index].replace('_',' ').slice(1))) : 
+                                ((softskillsKey[index]).charAt(0).toUpperCase() + (softskillsKey[index]).slice(1))
+                                    }</Text>
                                 </TouchableOpacity>
                                     
                         </View>

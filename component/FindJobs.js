@@ -101,7 +101,7 @@ const FindJobs = ({navigation}) => {
                         nama_job: 'Front-end Developer'
                       }
                     });
-                  }else if(skill1 == 'python' && skill2 == 'sql' || skill1=='sql' && skill2=='python'){
+                  }else if(skill1 == 'python' && skill2 == 'data science' || skill1=='data science' && skill2=='python'){
                     //data scientist
                     setModalVisible(false);
                     setShowBlur(false);
@@ -111,14 +111,14 @@ const FindJobs = ({navigation}) => {
                         nama_job: 'Data Scientist'
                       }
                     });
-                  }else if(skill1 == 'ui design' && skill2 == 'ux research' || skill1=='ux research' && skill2=='ui design'){
+                  }else if(skill1 == 'nodejs' && skill2 == 'api' || skill1=='api' && skill2=='nodejs'){
                     //product designer
                     setModalVisible(false);
                     setShowBlur(false);
                     navigation.navigate('JobsByName', {
                       screen: 'FindJobsByNameResultTrue',
                       params:{
-                        nama_job: 'Product Designer'
+                        nama_job: 'FullStack Developer'
                       }
                     });
                   }else{

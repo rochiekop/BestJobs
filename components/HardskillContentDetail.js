@@ -80,15 +80,35 @@ export default function HardSkillContent({navigation,route}) {
                           style={{marginTop: 35, marginLeft: 33, marginRight: 20}}
                         />
                         <View style={{marginTop: 34}}>
-                          <Text
+                          {(key.includes('_') ? (
+                            <View>
+                            <Text
                             style={{
                               fontFamily: 'Mont Bold',
                               fontWeight: 'bold',
-                              fontSize: 30,
+                              fontSize: 26,
                               color: '#23120b',
-                            }}>
-                            {key.toUpperCase()}
-                          </Text>
+                            }}>{(key.split('_')[0]).charAt(0).toUpperCase() +(key.split('_')[0].slice(1))}</Text>
+                           <Text
+                            style={{
+                              fontFamily: 'Mont Bold',
+                              fontWeight: 'bold',
+                              fontSize: 26,
+                              color: '#23120b',
+                            }}>{(key.split('_')[1]).charAt(0).toUpperCase() +(key.split('_')[1].slice(1))}</Text>
+                            </View>
+                            
+                          ): (
+                            
+                            <Text
+                            style={{
+                              fontFamily: 'Mont Bold',
+                              fontWeight: 'bold',
+                              fontSize: 26,
+                              color: '#23120b',
+                            }}>{((key).charAt(0).toUpperCase() + (key).slice(1))}</Text>
+                          ))}
+                          
                         </View>
                       </View>
                       <View style={[styles.backgroundVideo,{
@@ -155,15 +175,35 @@ export default function HardSkillContent({navigation,route}) {
                           style={{marginTop: 35, marginLeft: 33, marginRight: 20}}
                         />
                         <View style={{marginTop: 34}}>
-                          <Text
+                          {(key.includes('_') ? (
+                            <View>
+                            <Text
                             style={{
                               fontFamily: 'Mont Bold',
                               fontWeight: 'bold',
-                              fontSize: 30,
+                              fontSize: 26,
                               color: '#23120b',
-                            }}>
-                            {key.toUpperCase()}
-                          </Text>
+                            }}>{(key.split('_')[0]).charAt(0).toUpperCase() +(key.split('_')[0].slice(1))}</Text>
+                           <Text
+                            style={{
+                              fontFamily: 'Mont Bold',
+                              fontWeight: 'bold',
+                              fontSize: 26,
+                              color: '#23120b',
+                            }}>{(key.split('_')[1]).charAt(0).toUpperCase() +(key.split('_')[1].slice(1))}</Text>
+                            </View>
+                            
+                          ): (
+                            
+                            <Text
+                            style={{
+                              fontFamily: 'Mont Bold',
+                              fontWeight: 'bold',
+                              fontSize: 26,
+                              color: '#23120b',
+                            }}>{((key).charAt(0).toUpperCase() + (key).slice(1))}</Text>
+                          ))}
+                          
                         </View>
                       </View>
                       <View style={[styles.backgroundVideo,{
