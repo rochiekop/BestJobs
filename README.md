@@ -16,4 +16,7 @@ The background of the best jobs application is that many users find it difficult
  - :octocat: Lukman Riyadi
  - :octocat: Rochi Eko Pambudi
  - :octocat: Giffari Halika Utama
------
+
+##  :wrench: Tools
+ - React Native V6.3
+ - Firebase
