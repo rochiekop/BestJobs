@@ -1,4 +1,6 @@
 ## Best Jobs
+Best Jobs application is one of the applications that provide information about the job that related to user skills preferences, this application also includes some learning resources for improving skills with the related job that the user wants.
+
 <img src="assets/img/Mockup.png" width=800> 
 
 ## Background
